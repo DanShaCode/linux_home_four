@@ -1,0 +1,26 @@
+#!/bin/bash
+
+source_dir="$1"
+
+if [ ! -d "$source_dir" ]; then
+  echo "Указанный путь не существует."
+  exit 1
+fi
+
+cd "$source_dir"
+
+for file in *; do
+ 
+  if [ -f "$file" ]; then
+  
+    filename="${file%.*}"
+
+    if [ ! -d "$filename" ]; then
+      mkdir "$filename"
+    fi
+
+    cp "$file" "$filename/"
+  fi
+done
+
+echo "Операция завершена."
